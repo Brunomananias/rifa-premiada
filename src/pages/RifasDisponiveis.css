@@ -1,0 +1,82 @@
+.rifas-container {
+    padding: 3rem 2rem;
+    background: #121212; /* fundo principal escuro */
+    color: #f0f0f0;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    text-align: center;
+  }
+  
+  .raffles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .raffle-card {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    padding: 1.5rem 1rem;
+    transition: 0.3s ease;
+  }
+  
+  .raffle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  }
+  
+  .raffle-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .raffle-card h3 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .raffle-card p {
+    font-size: 1rem;
+    color: #bbbbbb;
+    min-height: 60px;
+  }
+  
+  .raffle-info {
+    display: flex;
+    justify-content: space-between;
+    color: #aaa;
+    font-size: 0.9rem;
+    margin: 1rem 0;
+  }
+  
+  .raffle-button {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    background-color: #7c3aed; /* roxo vibrante */
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+  
+  .raffle-button:hover {
+    background-color: #5b21b6;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  

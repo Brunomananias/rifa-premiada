@@ -1,0 +1,55 @@
+.pix-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #111;
+    color: white;
+    height: 100vh;
+    padding: 2rem;
+  }
+  
+  .pix-card {
+    background-color: #222;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  
+  .pix-info {
+    margin-top: 2rem;
+  }
+  
+  .qrcode img {
+    width: 200px;
+    height: 200px;
+    margin-top: 1rem;
+  }
+  
+  .number-button {
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    cursor: default;
+  }
+  
+  .button {
+    background-color: #ffd700;
+    color: #000;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .button:hover {
+    background-color: #ffc400;
+  }
+  
