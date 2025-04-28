@@ -1,0 +1,58 @@
+/* Card Moderno */
+.custom-card {
+    background-color: #fff; /* Fundo branco para dar contraste */
+    border-radius: 16px; /* Bordas arredondadas */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border: none; /* Remove bordas padrões */
+    margin: 20px 0; /* Margem para espaçamento */
+    width: 450px; /* Tamanho fixo para o card */
+    justify-content: center; /* Garante que o conteúdo esteja centralizado no card */
+  }
+  
+  /* Contêiner para centralizar o card */
+  .container {
+    display: flex; /* Usa o flexbox */
+    height: 100vh; /* Faz o contêiner ocupar a altura total da tela */
+    flex-direction: column; /* Organiza os itens em coluna */
+  }
+  
+  
+  .custom-card-title {
+    color: #000000; /* Cor azul para o título */
+    font-size: 1.25rem; /* Aumenta o tamanho da fonte do título */
+    font-weight: 600; /* Deixa o título mais forte */
+    padding-left: 90px;
+  }
+  
+  .custom-card-text {
+    color: #333; /* Texto escuro */
+    font-size: 1rem; /* Ajuste no tamanho da fonte */
+    padding-left: 130px;
+  }
+  
+  .custom-card-text strong {
+    color: #000000; /* Cor azul para o texto "Maior Cota" e "Menor Cota" */
+  }
+  
+  /* Efeito no hover do card */
+  .custom-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .primary-button {
+    padding: 12px 24px;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .primary-button:hover {
+    background-color: #3730a3;
+  }
+  

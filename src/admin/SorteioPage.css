@@ -1,0 +1,49 @@
+.sorteio-container {
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.select-container {
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.btn-sortear {
+  padding: 10px 20px;
+  font-size: 18px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-sortear:hover {
+  background: #218838;
+}
+
+.numero-sorteado {
+  margin-top: 30px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #ff5722;
+}
+
+.erro {
+  color: red;
+  margin-top: 10px;
+}
+
+.comprador {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4caf50;
+}
+

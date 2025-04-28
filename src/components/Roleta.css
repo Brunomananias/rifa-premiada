@@ -1,0 +1,179 @@
+.roleta-container {
+    position: relative;
+    width: 320px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .roleta {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 8px solid #686868;
+    overflow: hidden;
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  
+  .fatia {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 0;
+    left: 50%;
+    transform-origin: 0% 100%;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: visible; /* Garante que todas as fatias visíveis apareçam */
+    background: none; /* Nenhuma fatia terá fundo padrão preto */
+  }
+  
+  .texto-premio {
+    transform: skewY(30deg) rotate(-60deg);
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-left: -80px;
+    width: 100px; /* Ajuste para o texto caber direitinho */
+  }
+  
+  .apontador {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid #ff0000;
+    z-index: 10;
+  }
+  
+  .botao-girar {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .botao-girar:hover {
+    background: #555;
+  }
+
+/* Estilo do modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards; /* Animação de aparecimento */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+    animation: scaleUp 0.5s forwards; /* Animação de entrada com zoom */
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal h2 {
+    font-size: 28px;
+    color: #4CAF50;
+    font-weight: bold;
+    margin-bottom: 15px;
+    animation: slideIn 0.7s ease-out; /* Animação do título */
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal p {
+    font-size: 22px;
+    color: #333;
+    margin: 15px 0;
+    animation: fadeInText 1s ease-in-out; /* Efeito de fade para o texto */
+}
+
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fechar-modal {
+    background-color: #FF4081;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.fechar-modal:hover {
+    background-color: #E91E63;
+}
+
+.fechar-modal:active {
+    background-color: #D81B60;
+    transform: translateY(2px);
+}
+
+  

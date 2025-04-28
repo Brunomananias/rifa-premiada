@@ -29,11 +29,17 @@ const AdminNavbar = () => {
       <Link to="/admin/rifas" style={linkStyle('/admin/rifas')}>
         Rifas
       </Link>
+      <Link to="/admin/menor-maior-cota" style={linkStyle('/admin/menor-maior-cota')}>
+        Menor e Maior 
+      </Link>
       <Link to="/admin/compras" style={linkStyle('/admin/compras')}>
         Compras
       </Link>
-      <Link to="/admin/config-pix" style={linkStyle('/admin/config-pix')}>
-        Configuração Pix
+      <Link to="/admin/clientes" style={linkStyle('/admin/clientes')}>
+        Clientes
+      </Link>
+      <Link to="/admin/sorteio" style={linkStyle('/admin/sorteio')}>
+        Sorteio
       </Link>
       <Link to="/admin/gateway-config" style={linkStyle('/admin/gateway-config')}>
         Gateway de Pagamento

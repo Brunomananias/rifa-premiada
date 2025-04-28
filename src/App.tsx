@@ -7,9 +7,17 @@ import NotFound from './pages/NotFound';
 import RifasAdmin from './admin/RifasAdmin';
 import CheckoutPage from './pages/CheckoutPage'; 
 import PixPage from './pages/PixPage';
+import ComoFuncionaPage from './pages/ComoFuncionaPage';
 import RifasDisponiveis from './pages/RifasDisponiveis';
 import PublicLayout from './components/PublicLayout';
 import AdminGatewayConfig from './admin/AdminGatewayConfig';
+import ContatoPage from './pages/ContatoPage';
+import ComprasPage from './admin/ComprasPage';
+import PagamentoConcluidoPage from './pages/PagamentoConcluido';
+import MaiorMenorCotaPage from './admin/MaiorMenorCota';
+import ClientesPage from './admin/ClientesPage';
+import Roleta from './components/Roleta';
+import SorteioPage from './admin/SorteioPage';
 
 const App = () => {
   return (
@@ -17,11 +25,16 @@ const App = () => {
       {/* Layout público com Navbar */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/como-funciona" element={<ComoFuncionaPage />} />
+        <Route path="/contato" element={<ContatoPage />} />
         <Route path="/rifas" element={<RifasDisponiveis />} />
         <Route path="/rifa/:id" element={<RifaPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/pix" element={<PixPage />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/pagamento-concluido" element={<PagamentoConcluidoPage />} />
+        <Route path="/roleta" element={<Roleta premios={["Moto", "Carro", "Celular", "Notebook", "TV"]} />} />
+
       </Route>
 
       {/* Rotas sem navbar (Admin) */}
@@ -30,6 +43,10 @@ const App = () => {
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
       <Route path="/admin/rifas" element={<RifasAdmin />} />
       <Route path="/admin/gateway-config" element={<AdminGatewayConfig />} />
+      <Route path="/admin/compras" element={<ComprasPage />} />
+      <Route path="/admin/menor-maior-cota" element={<MaiorMenorCotaPage />} />
+      <Route path="/admin/clientes" element={<ClientesPage />} />
+      <Route path="/admin/sorteio" element={<SorteioPage />} />
     </Routes>
   );
 };

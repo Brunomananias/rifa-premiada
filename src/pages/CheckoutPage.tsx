@@ -36,18 +36,18 @@ const CheckoutPage = () => {
     }
   
     try {
+      const numerosComoString = numerosSelecionados.join(',');
       const checkoutResponse = await apiClient.post('/api/PixTransactions/checkout', {
         user: {
           name: nome,
           whatsapp: whatsapp
         },
         raffleId: raffleId,
-        numbers: numerosSelecionados,
+        numbers: numerosComoString,
         price: totalPrice
       });
   
-      const { transactionId, pixCode } = checkoutResponse.data;
-  
+      const { transactionId, pixCode, numbersSoldIds } = checkoutResponse.data;
       navigate('/pix', {
         state: {
           numerosSelecionados,
@@ -55,7 +55,8 @@ const CheckoutPage = () => {
           totalPrice,
           transactionId,
           pixCode,
-          raffleId
+          raffleId,
+          numbersSoldIds
         }
       });
     } catch (err) {
