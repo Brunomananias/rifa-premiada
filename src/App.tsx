@@ -18,6 +18,9 @@ import MaiorMenorCotaPage from './admin/MaiorMenorCota';
 import ClientesPage from './admin/ClientesPage';
 import Roleta from './components/Roleta';
 import SorteioPage from './admin/SorteioPage';
+import PlanosPage from './pages/PlanosPage';
+import RegisterPage from './admin/RegisterPage';
+import ProtectedRoute from './contexts/ProtectedRoute';
 
 const App = () => {
   return (
@@ -27,19 +30,21 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/como-funciona" element={<ComoFuncionaPage />} />
         <Route path="/contato" element={<ContatoPage />} />
+        <Route path="/planos" element={<PlanosPage />} />
         <Route path="/rifas" element={<RifasDisponiveis />} />
         <Route path="/rifa/:id" element={<RifaPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/pix" element={<PixPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/pagamento-concluido" element={<PagamentoConcluidoPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/roleta" element={<Roleta premios={["Moto", "Carro", "Celular", "Notebook", "TV"]} />} />
 
       </Route>
 
       {/* Rotas sem navbar (Admin) */}
-
       <Route path="/admin" element={<AdminLogin />} />
+      <Route element={<ProtectedRoute />}>
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
       <Route path="/admin/rifas" element={<RifasAdmin />} />
       <Route path="/admin/gateway-config" element={<AdminGatewayConfig />} />
@@ -47,6 +52,7 @@ const App = () => {
       <Route path="/admin/menor-maior-cota" element={<MaiorMenorCotaPage />} />
       <Route path="/admin/clientes" element={<ClientesPage />} />
       <Route path="/admin/sorteio" element={<SorteioPage />} />
+      </Route>
     </Routes>
   );
 };

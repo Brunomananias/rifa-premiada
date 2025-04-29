@@ -14,19 +14,24 @@ const apiClient = axios.create({
   },
 });
 
-// Interceptor para adicionar o token ao cabeçalho Authorization em cada requisição
-// apiClient.interceptors.request.use(
-//   (config) => {
-//     const token = getToken(); // Recupera o token do localStorage
-//     if (token) {
-//       config.headers['Authorization'] = `Bearer ${token}`; // Adiciona o token no cabeçalho
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export const login = async (email: string, password: string) => {
+  const response = await apiClient.post('/auth/login', { email, password });
+  return response.data;
+};
+
+export const getProtectedData = async () => {
+  const response = await apiClient.get('/protected-route');
+  return response.data;
+};
+
 
 // export const getIdUsuario = () => {
 //   const token = localStorage.getItem('jwtToken');

@@ -1,0 +1,81 @@
+.pricing-section {
+    text-align: center;
+    padding: 2rem;
+    background-color: #000000;
+  }
+  
+  .pricing-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #e7e7e7;
+  }
+  
+  .plans-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .plan-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 280px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .plan-card:hover {
+    transform: translateY(-10px);
+    border-color: #007bff;
+  }
+  
+  .plan-card h2 {
+    font-size: 1.5rem;
+    color: #0f63ff;
+    margin-bottom: 1rem;
+  }
+  
+  .plan-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: black;
+  }
+  
+  .plan-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .plan-card li {
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+  
+  .subscribe-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .subscribe-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .plans-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
