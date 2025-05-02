@@ -1,66 +1,45 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import apiClient from '../services/apiClient';
 import './AdminGatewayConfig.css';
 import AdminLayout from './AdminLayout';
+import { toast } from 'react-toastify';
 
 const AdminGatewayConfig = () => {
-  const [pixKey, setPixKey] = useState('');
-  const [pixCopiaCola, setPixCopiaCola] = useState('');
-  const [pagarMeKey, setPagarMeKey] = useState('');
-  const [mercadoPagoKey, setMercadoPagoKey] = useState('');
-  
-  // Estado para armazenar se o gateway está habilitado
-  const [pixEnabled, setPixEnabled] = useState(false);
-  const [pagarMeEnabled, setPagarMeEnabled] = useState(false);
-  const [mercadoPagoEnabled, setMercadoPagoEnabled] = useState(false);
-
+  const [paggueClientKey, setPaggueClientKey] = useState('');
+  const [paggueClientSecret, setPaggueClientSecret] = useState('');
+  const [paggueCompanyId, setPaggueCompanyId] = useState('');
+  const [paggueEnabled, setPaggueEnabled] = useState(false);
+  const userId = localStorage.getItem('user');
   useEffect(() => {
-    apiClient.get('/api/PaymentGatewayConfig/Config').then((res) => {
-      // Acessando diretamente os valores de objetos (não um array)
-      setPagarMeKey(res.data.pagarMeConfig.pagarMeKey || '');  // Atualiza o estado com a chave PagarMe
-      setPagarMeEnabled(res.data.pagarMeConfig.enabled || false);  // Atualiza o estado com o status de habilitação
-      setMercadoPagoKey(res.data.mercadoPagoConfig.mercadoPagoKey || '');  // Atualiza a chave Mercado Pago
-      setMercadoPagoEnabled(res.data.mercadoPagoConfig.enabled || false);  // Atualiza o status de habilitação do Mercado Pago
-    }).catch((error) => {
-      console.error('Erro ao buscar configurações:', error);
-    });
+    apiClient.get(`/api/Gateway/${Number(userId)}`)
+      .then((res) => {
+        setPaggueClientKey(res.data.clientKey || '');
+        setPaggueClientSecret(res.data.clientSecret || '');
+        setPaggueCompanyId(res.data.idEmpresa || '');
+        setPaggueEnabled(res.data.enabled || false);
+      })
   }, []);
-  
 
-  // Função para salvar as configurações
   const handleSave = () => {
-    if (!pixKey || !pixCopiaCola || !pagarMeKey || !mercadoPagoKey) {
-      alert('Por favor, preencha todos os campos.');
+    if (!paggueClientKey || !paggueClientSecret) {
+      toast.warning("Por favor, preencha todas as informações do Paggue.");
       return;
     }
-    
-    // Configuração do Pix
-    apiClient.post('/api/PaymentGatewayConfig/PixConfig', { pixKey, pixCopiaCola, enabled: pixEnabled })
+
+    apiClient.post('/api/Gateway/save', {
+      clientKey: paggueClientKey,
+      clientSecret: paggueClientSecret,
+      companyId: paggueCompanyId,
+      userId: Number(userId),
+      enabled: paggueEnabled,
+    })
       .then(() => {
-        alert('Configuração Pix salva com sucesso!');
+        toast.success("Configuração do Paggue salva com sucesso!");
       })
       .catch((err) => {
-        alert('Erro ao salvar a configuração do Pix!');
-        console.error(err);
-      });
-  
-    // Configuração do Pagar.me
-    apiClient.post('/api/PaymentGatewayConfig/PagarMeConfig', { pagarMeKey, enabled: pagarMeEnabled })
-      .then(() => {
-        alert('Configuração Pagar.me salva com sucesso!');
-      })
-      .catch((err) => {
-        alert('Erro ao salvar a configuração do Pagar.me!');
-        console.error(err);
-      });
-  
-    // Configuração do Mercado Pago
-    apiClient.post('/api/PaymentGatewayConfig/MercadoPagoConfig', { mercadoPagoKey, enabled: mercadoPagoEnabled })
-      .then(() => {
-        alert('Configuração Mercado Pago salva com sucesso!');
-      })
-      .catch((err) => {
-        alert('Erro ao salvar a configuração do Mercado Pago!');
+        toast.warning("erro ao salvar as configurações!");
+
         console.error(err);
       });
   };
@@ -68,78 +47,42 @@ const AdminGatewayConfig = () => {
   return (
     <AdminLayout>
       <div className="gateway-container">
-        <h2>Configuração de Gateways de Pagamento</h2>
+        <h2>Configuração Gateway Paggue</h2>
 
         <div className="gateway-group">
-          <h3>Gateway Pix</h3>
-          <div className="gateway-label">Chave Pix:</div>
+          <div className="gateway-label">Client Key:</div>
           <input
             type="text"
             className="gateway-input"
-            value={pixKey}
-            onChange={(e) => setPixKey(e.target.value)}
-            placeholder="Insira a chave Pix"
+            value={paggueClientKey}
+            onChange={(e) => setPaggueClientKey(e.target.value)}
+            placeholder="Insira sua Client Key"
           />
-          <div className="gateway-label">Pix Copia e Cola:</div>
-          <textarea
-            className="gateway-textarea"
-            value={pixCopiaCola}
-            onChange={(e) => setPixCopiaCola(e.target.value)}
-            placeholder="Insira o código Copia e Cola"
-          />
-          <div className="gateway-label">Habilitar Gateway Pix:</div>
-          <label className="switch">
-            <input
-              type="checkbox"
-              checked={pixEnabled}
-              onChange={(e) => setPixEnabled(e.target.checked)} // Atualiza o estado ao alterar o checkbox
-            />
-            <span className="slider round"></span>
-          </label>
-        </div>
 
-        <div className="gateway-group">
-          <h3>Pagar.me</h3>
-          <div className="gateway-label">Chave Pagar.me:</div>
-          <input
-  type="text"
-  className="gateway-input"
-  value={pagarMeKey}  // Passando o valor para o campo de entrada
-  onChange={(e) => {
-    console.log("Valor digitado:", e.target.value);  // Verifica o valor digitado
-    setPagarMeKey(e.target.value);  // Atualiza o estado com o valor digitado
-  }}  
-  placeholder="Insira a chave Pagar.me"
-/>
-
-
-          <div className="gateway-label">Habilitar Gateway Pagar.me:</div>
-          <label className="switch">
-            <input
-              type="checkbox"
-              checked={pagarMeEnabled}
-              onChange={(e) => setPagarMeEnabled(e.target.checked)} // Atualiza o estado ao alterar o checkbox
-            />
-            <span className="slider round"></span>
-          </label>
-        </div>
-
-        <div className="gateway-group">
-          <h3>Mercado Pago</h3>
-          <div className="gateway-label">Chave Mercado Pago:</div>
+          <div className="gateway-label">Client Secret:</div>
           <input
             type="text"
             className="gateway-input"
-            value={mercadoPagoKey}
-            onChange={(e) => setMercadoPagoKey(e.target.value)}
-            placeholder="Insira a chave Mercado Pago"
+            value={paggueClientSecret}
+            onChange={(e) => setPaggueClientSecret(e.target.value)}
+            placeholder="Insira seu Client Secret"
           />
-          <div className="gateway-label">Habilitar Gateway Mercado Pago:</div>
+
+          <div className="gateway-label">ID empresa:</div>
+          <input
+            type="text"
+            className="gateway-input"
+            value={paggueCompanyId}
+            onChange={(e) => setPaggueCompanyId(e.target.value)}
+            placeholder="Insira seu ID empresa"
+          />
+
+          <div className="gateway-label">Habilitar Gateway Paggue:</div>
           <label className="switch">
             <input
               type="checkbox"
-              checked={mercadoPagoEnabled}
-              onChange={(e) => setMercadoPagoEnabled(e.target.checked)} // Atualiza o estado ao alterar o checkbox
+              checked={paggueEnabled}
+              onChange={(e) => setPaggueEnabled(e.target.checked)}
             />
             <span className="slider round"></span>
           </label>

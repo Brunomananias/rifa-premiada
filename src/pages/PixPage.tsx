@@ -8,6 +8,7 @@ interface PixPageState {
   email: string;
   descricao: string;
   totalPrice: number;
+  raffleId: number;
   rifaTitle: string;
   transactionId: number;
   numbersSoldIds: number;
@@ -50,7 +51,8 @@ const PixPage: React.FC = () => {
       meta: {
         extraData: "Algum dado extra",
         webhookUrl: "https://seu-webhook-url"
-      }
+      },
+      raffleId: state.raffleId 
     })
       .then(response => {
         console.log(response.data);
@@ -68,7 +70,8 @@ const PixPage: React.FC = () => {
 
   const startPaymentStatusCheck = (paymentId: string) => {
     const intervalId = setInterval(() => {
-      apiClient.get<PaymentStatusResponse>(`/api/PagguePayment/status/${paymentId}`)
+      apiClient
+        .get<PaymentStatusResponse>(`/api/PagguePayment/status/${paymentId}?rifaId=${state.raffleId}`)
         .then(response => {
           const newStatus = response.data.status;
           setPaymentStatus(newStatus);

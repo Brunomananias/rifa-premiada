@@ -68,6 +68,7 @@ const AdminNavbar = ({ closeSidebar }: IProps) => {
       <Link to="/admin/sorteio" onClick={handleLinkClick} style={linkStyle('/admin/sorteio')}>Sorteio</Link>
       {planId === 3 && <Link to="/admin/gateway-config" onClick={handleLinkClick} style={linkStyle('/admin/gateway-config')}>Gateway de Pagamento</Link>}
       <Link to="/admin/plano" onClick={handleLinkClick} style={linkStyle('/admin/plano')}>Meu Plano</Link>
+      <Link to="/admin/gateway-config" onClick={handleLinkClick} style={linkStyle('/admin/gateway-config')}>Configuração</Link>
 
       <button onClick={() => { handleLogout(); handleLinkClick(); }} style={{ ...linkStyle('/'), marginTop: '2rem', background: 'none', border: 'none', textAlign: 'left', width: '100%', cursor: 'pointer' }}>SAIR</button>
 
