@@ -15,7 +15,7 @@ export default function SorteioPage() {
   useEffect(() => {
     const fetchRifas = async () => {
       try {
-        const response = await apiClient.get('/api/raffles/all-raffles');
+        const response = await apiClient.get('api/raffles/all-raffles');
         setRifas(response.data);
       } catch (error) {
         console.error("Erro ao buscar rifas:", error);
@@ -37,7 +37,7 @@ export default function SorteioPage() {
     setNomeComprador(null); // Resetando o nome do comprador
 
     try {
-      const response = await apiClient.post(`/api/raffles/${rifaSelecionada}/sortear`);
+      const response = await apiClient.post(`api/raffles/${rifaSelecionada}/sortear`);
       const { numeroSorteado, nomeComprador } = response.data; // Agora recebemos o nome do comprador
 
       setTimeout(() => { // animação simulada

@@ -33,7 +33,7 @@ const ContatoPage = () => {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       // Aqui você faria a chamada real para sua API
-      // const response = await apiClient.post('/api/contato', formData);
+      // const response = await apiClient.post('api/contato', formData);
       
       setSubmitStatus({
         success: true,

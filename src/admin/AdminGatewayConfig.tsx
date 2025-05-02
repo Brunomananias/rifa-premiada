@@ -12,7 +12,7 @@ const AdminGatewayConfig = () => {
   const [paggueEnabled, setPaggueEnabled] = useState(false);
   const userId = localStorage.getItem('user');
   useEffect(() => {
-    apiClient.get(`/api/Gateway/${Number(userId)}`)
+    apiClient.get(`api/Gateway/${Number(userId)}`)
       .then((res) => {
         setPaggueClientKey(res.data.clientKey || '');
         setPaggueClientSecret(res.data.clientSecret || '');
@@ -27,7 +27,7 @@ const AdminGatewayConfig = () => {
       return;
     }
 
-    apiClient.post('/api/Gateway/save', {
+    apiClient.post('api/Gateway/save', {
       clientKey: paggueClientKey,
       clientSecret: paggueClientSecret,
       companyId: paggueCompanyId,

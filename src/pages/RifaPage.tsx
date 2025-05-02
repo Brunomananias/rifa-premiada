@@ -27,7 +27,7 @@ const RifaPage = () => {
       try {
         setIsLoading(true);
         if (id) {
-          const response = await apiClient.get(`/api/Raffles/${id}`);
+          const response = await apiClient.get(`api/Raffles/${id}`);
           setRifa(response.data);
         }
       } catch (error) {

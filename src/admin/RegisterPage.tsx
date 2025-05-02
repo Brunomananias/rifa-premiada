@@ -63,7 +63,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await apiClient.post('/api/auth/register', {
+      const response = await apiClient.post('api/auth/register', {
         name: form.name,
         email: form.email,
         password: form.password,

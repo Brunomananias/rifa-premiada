@@ -59,10 +59,10 @@ const PixMercadoPagoPage: React.FC = () => {
     try {
       setIsLoading(true);
   
-      const userEmailResponse = await apiClient.get<string>(`/api/users/user-email?idUser=${user}`);
+      const userEmailResponse = await apiClient.get<string>(`api/users/user-email?idUser=${user}`);
       const email = userEmailResponse.data;
   
-      const response = await apiClient.post<PixResponse>('/api/MercadoPago', {
+      const response = await apiClient.post<PixResponse>('api/MercadoPago', {
         email,
         descricao: "assinatura",
         valor: 1
@@ -94,7 +94,7 @@ const PixMercadoPagoPage: React.FC = () => {
 
   const startPaymentStatusCheck = (paymentId: string) => {
     const intervalId = setInterval(() => {
-      apiClient.get<PaymentStatusResponse>(`/api/MercadoPago/status/${paymentId}`)
+      apiClient.get<PaymentStatusResponse>(`api/MercadoPago/status/${paymentId}`)
         .then(response => {
           const newStatus = response.data.status;
           setPaymentStatus(newStatus);
@@ -104,7 +104,7 @@ const PixMercadoPagoPage: React.FC = () => {
             const userId = localStorage.getItem('user');
             if (userId && state.id) {
                 // Atualizar plano do usuário
-                apiClient.put(`/api/Users/plan`, {
+                apiClient.put(`api/Users/plan`, {
                   userId: Number(userId),
                   planId: Number(state.id),
                   planName: state.name

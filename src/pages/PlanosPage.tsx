@@ -24,7 +24,7 @@ const PlanosPage: React.FC = () => {
 
   const fetchPlans = async () => {
     try {
-      const response = await apiClient.get('/api/plans');
+      const response = await apiClient.get('api/plans');
       if (!response) {
         throw new Error('Erro ao buscar planos');
       }

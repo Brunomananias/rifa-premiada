@@ -17,7 +17,7 @@ const MaiorMenorCotaPage = () => {
   useEffect(() => {
     // Carregar as rifas do sistema
     const fetchRifas = async () => {
-      const response = await apiClient.get('/api/raffles'); // Endpoint para listar as rifas
+      const response = await apiClient.get('api/raffles'); // Endpoint para listar as rifas
       console.log(response.data)
       setRifas(response.data); // Presumindo que a resposta seja um array de rifas
     };

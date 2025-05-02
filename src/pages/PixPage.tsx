@@ -42,7 +42,7 @@ const PixPage: React.FC = () => {
     console.log(state);
 
     // Fazer a requisição para criar o pagamento Pix
-    apiClient.post<PaggueResponse>('/api/PagguePayment/gerar-pix', {
+    apiClient.post<PaggueResponse>('api/PagguePayment/gerar-pix', {
       payerName: "Teste de integração",
       amount: state.totalPrice,
       expiration: 1, // tempo de expiração em minutos
@@ -71,7 +71,7 @@ const PixPage: React.FC = () => {
   const startPaymentStatusCheck = (paymentId: string) => {
     const intervalId = setInterval(() => {
       apiClient
-        .get<PaymentStatusResponse>(`/api/PagguePayment/status/${paymentId}?rifaId=${state.raffleId}`)
+        .get<PaymentStatusResponse>(`api/PagguePayment/status/${paymentId}?rifaId=${state.raffleId}`)
         .then(response => {
           const newStatus = response.data.status;
           setPaymentStatus(newStatus);
@@ -120,7 +120,7 @@ const PixPage: React.FC = () => {
 
   const cancelTransaction = () => {
     console.log('Cancelando a transação devido ao tempo expirado');
-    apiClient.delete(`/api/PixTransactions/${state.numbersSoldIds}`)
+    apiClient.delete(`api/PixTransactions/${state.numbersSoldIds}`)
       .then(() => {
         alert('Pagamento expirado. Transação cancelada.');
         navigate('/rifas');

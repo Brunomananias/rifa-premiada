@@ -40,7 +40,7 @@ const PlanoPage: React.FC = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await apiClient.get("/api/plans");
+        const response = await apiClient.get("api/plans");
         setPlans(response.data);
       } catch (err: any) {
         setError("Erro ao buscar planos");
@@ -51,7 +51,7 @@ const PlanoPage: React.FC = () => {
  
     const fetchSelectedPlan = async () => {
       try {
-        const response = await apiClient.get(`/api/plans/${planId}`);
+        const response = await apiClient.get(`api/plans/${planId}`);
         setSelectedPlan(response.data);
       } catch (err: any) {
         setError("Erro ao buscar planos");
@@ -69,7 +69,7 @@ const PlanoPage: React.FC = () => {
   
     const interval = setInterval(async () => {
       try {
-        const res = await apiClient.get(`/api/pagamentos/status/${pixData.PaymentId}`);
+        const res = await apiClient.get(`api/pagamentos/status/${pixData.PaymentId}`);
         const status = res.data.status;
   
         if (status === "approved") {
@@ -88,8 +88,8 @@ const PlanoPage: React.FC = () => {
 
   const handleSubscribe = async (plan: Plan) => {
     try {
-      const userEmail = await apiClient.get(`/api/users/user-email?idUser=${user}`);
-      const response = await apiClient.post("/api/MercadoPago", {
+      const userEmail = await apiClient.get(`api/users/user-email?idUser=${user}`);
+      const response = await apiClient.post("api/MercadoPago", {
         Valor: parseFloat(plan.price),
         Descricao: `Assinatura do plano ${plan.name}`,
         Email: userEmail.data

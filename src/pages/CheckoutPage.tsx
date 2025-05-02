@@ -38,7 +38,7 @@ const CheckoutPage = () => {
   
     try {
       const numerosComoString = numerosSelecionados.join(',');
-      const checkoutResponse = await apiClient.post('/api/PixTransactions/checkout', {
+      const checkoutResponse = await apiClient.post('api/PixTransactions/checkout', {
         customer: {
           name: nome,
           whatsapp: whatsapp

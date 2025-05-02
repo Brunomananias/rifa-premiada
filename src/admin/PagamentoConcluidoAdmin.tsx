@@ -17,7 +17,7 @@ const PagamentoConcluidoPage = () => {
             if (!state?.paymentId) return;
          
             try {
-                await apiClient.put(`/api/PixTransactions/update-pix-status/${state.paymentId}`, {
+                await apiClient.put(`api/PixTransactions/update-pix-status/${state.paymentId}`, {
                     status: 'approved'
                 });
                 console.log('Pix status atualizado com sucesso!');

@@ -72,7 +72,7 @@ const RafflesAdmin = () => {
     formData.append('image', file);
 
     try {
-      const response = await apiClient.post('/api/Raffles/UploadImage', formData, {
+      const response = await apiClient.post('api/Raffles/UploadImage', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -92,7 +92,7 @@ const RafflesAdmin = () => {
     try {
       if (editingId) {
         // Atualizar rifa existente
-        await apiClient.put(`/api/Raffles/${editingId}`, {
+        await apiClient.put(`api/Raffles/${editingId}`, {
           title: currentRaffle.title,
           description: currentRaffle.description,
           price: currentRaffle.price,
@@ -107,7 +107,7 @@ const RafflesAdmin = () => {
         handleSnackbar('Rifa atualizada com sucesso!', 'success');
       } else {
         // Criar nova rifa
-        const response = await apiClient.post('/api/Raffles', {
+        const response = await apiClient.post('api/Raffles', {
           title: currentRaffle.title,
           description: currentRaffle.description,
           price: currentRaffle.price,
@@ -142,7 +142,7 @@ const RafflesAdmin = () => {
   const handleDeleteRaffle = async (id: number) => {
     if (!window.confirm('Tem certeza que deseja deletar esta rifa?')) return;
     try {
-      await apiClient.delete(`/api/Raffles/${id}`);
+      await apiClient.delete(`api/Raffles/${id}`);
       setRaffles(raffles.filter((r) => r.id !== id));
       handleSnackbar('Rifa deletada com sucesso!', 'success');
     } catch (error) {
@@ -153,7 +153,7 @@ const RafflesAdmin = () => {
 
   const loadRaffles = async () => {
     try {
-      const response = await apiClient.get('/api/Raffles', {
+      const response = await apiClient.get('api/Raffles', {
         params: { idUsuarioLogado: idUser }
       });
       setRaffles(response.data);
