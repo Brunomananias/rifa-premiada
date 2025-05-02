@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './AdminLogin.css';
 import { useNavigate } from 'react-router-dom';
-import apiClient from '../services/apiClient';
 import { useAuth } from '../contexts/AuthContext';
+import apiClient from '../services/apiClient';
 
+import {
+  TextField,
+  Button,
+  IconButton,
+  InputAdornment,
+  Typography,
+  Box,
+  CircularProgress,
+  Link as MuiLink,
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -18,29 +28,23 @@ const AdminLogin = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    
+
     if (!email || !senha) {
       setError('Preencha todos os campos');
       return;
     }
 
     setLoading(true);
-    
+
     try {
       const response = await apiClient.post('api/auth/login', {
         email,
-        password: senha
+        password: senha,
       });
-      
-      // Aqui, você deveria receber o token e o user no response.data
-      const { token, user } = response.data;
-      
-      // Atualiza o contexto
-      login(token, user);
-      
-      // Redireciona
+      console.log(response.data);
+      const { token, user, plan_id, planName, userName} = response.data;
+      login(token, user, plan_id, planName, userName);
       navigate('/admin/dashboard');
-      
     } catch (err) {
       if (axios.isAxiosError(err)) {
         setError(err.response?.data?.message || 'Erro ao fazer login');
@@ -53,80 +57,102 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-container">
-        <div className="login-header">
-          <h1 className="logo">Rifa Premiada</h1>
-          <h2>Bem-vindo de volta!</h2>
-          <p className="subtitle">Insira suas informações abaixo para entrar na sua conta</p>
-        </div>
+    <Box
+      display="flex"
+      minHeight="100vh"
+      alignItems="center"
+      justifyContent="center"
+      bgcolor="#f5f5f5"
+      padding={2}
+    >
+      <Box
+        bgcolor="#fff"
+        p={4}
+        borderRadius={3}
+        boxShadow={3}
+        maxWidth={400}
+        width="100%"
+      >
+        <Typography variant="h4" fontWeight="bold" style={{ color: 'black' }} mb={1}>
+          Rifa Premiada
+        </Typography>
+        <Typography variant="h6" style={{ color: 'black' }} gutterBottom>
+          Bem-vindo de volta!
+        </Typography>
+        <Typography variant="body2" color="textSecondary" mb={3}>
+          Insira suas informações abaixo para entrar na sua conta
+        </Typography>
 
-        {error && <div className="error-message">{error}</div>}
+        {error && (
+          <Typography color="error" mb={2}>
+            {error}
+          </Typography>
+        )}
 
-        <form onSubmit={handleLogin} className="login-form">
-          <div className="form-group">
-            <label htmlFor="email">Endereço de e-mail</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Digite seu e-mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={error && !email ? 'input-error' : ''}
-              disabled={loading}
-            />
-          </div>
+        <form onSubmit={handleLogin}>
+          <TextField
+            fullWidth
+            label="Endereço de e-mail"
+            variant="outlined"
+            margin="normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
+          />
 
-          <div className="form-group">
-            <label htmlFor="senha">Senha</label>
-            <div className="password-input-container">
-              <input
-                id="senha"
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Digite sua senha"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                className={error && !senha ? 'input-error' : ''}
-                disabled={loading}
-              />
-              <button 
-                type="button" 
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? '🙈' : '👁️'}
-              </button>
-            </div>
-          </div>
+          <TextField
+            fullWidth
+            label="Senha"
+            variant="outlined"
+            margin="normal"
+            type={showPassword ? 'text' : 'password'}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            disabled={loading}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
 
-          <button 
-            type="submit" 
-            className="login-button"
+          <Button
+            fullWidth
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
             disabled={loading}
           >
-            {loading ? 'Carregando...' : 'Entrar'}
-          </button>
-
-          <div className="login-footer">
-            <a href="/forgot-password" className="forgot-password">Esqueceu sua senha?</a>
-            <p className="register-link">
-              Ainda não tem uma conta?{' '}
-              <span onClick={() => navigate('/register')}>Registre-se</span>
-            </p>
-          </div>
+            {loading ? <CircularProgress size={24} /> : 'Entrar'}
+          </Button>
         </form>
-      </div>
 
-      <div className="login-banner">
-        <img 
-          src="https://cdn-icons-png.flaticon.com/512/5579/5579459.png" 
-          alt="Ilustração de dashboard" 
-          className="banner-image"
-        />
-        <h3>Painel rápido e prático</h3>
-        <p>Acompanhe suas campanhas de perto com relatórios detalhados</p>
-      </div>
-    </div>
+        <Box mt={2}>
+          <MuiLink href="/forgot-password" underline="hover">
+            Esqueceu sua senha?
+          </MuiLink>
+        </Box>
+
+        <Typography mt={1} color="primary" >
+          Ainda não tem uma conta?{' '}
+          <MuiLink
+            component="button"
+            onClick={() => navigate('/register')}
+            underline="hover"
+          >
+            Registre-se
+          </MuiLink>
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 

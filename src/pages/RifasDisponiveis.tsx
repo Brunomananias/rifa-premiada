@@ -18,7 +18,7 @@ const RifasDisponiveis = () => {
   useEffect(() => {
     const fetchRaffles = async () => {
       try {
-        const response = await apiClient.get('/api/Raffles');
+        const response = await apiClient.get('/api/Raffles/all-raffles');
         setRaffles(response.data);
       } catch (error) {
         console.error("Erro ao carregar rifas", error);

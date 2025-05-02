@@ -15,7 +15,7 @@ export default function SorteioPage() {
   useEffect(() => {
     const fetchRifas = async () => {
       try {
-        const response = await apiClient.get('/api/raffles');
+        const response = await apiClient.get('/api/raffles/all-raffles');
         setRifas(response.data);
       } catch (error) {
         console.error("Erro ao buscar rifas:", error);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import apiClient from '../services/apiClient';
 import './CheckoutPage.css';
+import { formatWhatsapp } from '../util/index';
 
 const CheckoutPage = () => {
   const location = useLocation();
@@ -38,7 +39,7 @@ const CheckoutPage = () => {
     try {
       const numerosComoString = numerosSelecionados.join(',');
       const checkoutResponse = await apiClient.post('/api/PixTransactions/checkout', {
-        user: {
+        customer: {
           name: nome,
           whatsapp: whatsapp
         },
@@ -92,11 +93,11 @@ const CheckoutPage = () => {
             onChange={(e) => setNome(e.target.value)}
           />
           <input
-            type="text"
-            placeholder="WhatsApp (com DDD)"
-            value={whatsapp}
-            onChange={(e) => setWhatsapp(e.target.value)}
-          />
+          type="text"
+          placeholder="WhatsApp (com DDD)"
+          value={whatsapp}
+          onChange={(e) => setWhatsapp(formatWhatsapp(e.target.value))}
+        />
         </div>
 
         {erro && <p className="error-message">{erro}</p>}

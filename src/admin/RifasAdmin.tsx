@@ -4,6 +4,7 @@ import apiClient from '../services/apiClient';
 import { TextField, Button, Typography, Box, Snackbar, Alert, LinearProgress, Modal, Backdrop, Fade } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
+import { toast } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faTimes, 
@@ -31,6 +32,8 @@ interface Raffle {
 }
 
 const RafflesAdmin = () => {
+  const planId = localStorage.getItem('plan_id');
+  const idUser = localStorage.getItem('user');
   const [raffles, setRaffles] = useState<Raffle[]>([]);
   const [currentRaffle, setCurrentRaffle] = useState<Raffle>({
     id: Date.now(),
@@ -110,6 +113,7 @@ const RafflesAdmin = () => {
           price: currentRaffle.price,
           total_Numbers: currentRaffle.total_Numbers,
           image_Url: currentRaffle.image_Url,
+          user_id: idUser
         });
 
         setRaffles([...raffles, response.data]);
@@ -149,12 +153,15 @@ const RafflesAdmin = () => {
 
   const loadRaffles = async () => {
     try {
-      const response = await apiClient.get('/api/Raffles');
+      const response = await apiClient.get('/api/Raffles', {
+        params: { idUsuarioLogado: idUser }
+      });
       setRaffles(response.data);
     } catch (error) {
       console.error('Erro ao carregar rifas', error);
     }
   };
+  
 
   useEffect(() => {
     loadRaffles();
@@ -243,13 +250,27 @@ const RafflesAdmin = () => {
       </Box>
 
       <Button
-        onClick={() => setOpenModal(true)}
-        variant="contained"
-        color="primary"
-        sx={{ mt: 4 }}
-      >
-        Adicionar Nova Rifa
-      </Button>
+          onClick={() => {
+            
+
+            if ((planId == "5" || planId == "1")  && raffles.length == 1) {
+              toast.warning("Não é possível adicionar mais campanhas. Altere seu plano para liberar mais.");
+              return;
+            }else if(planId == "3" && raffles.length == 5){
+              toast.warning("Não é possível adicionar mais campanhas. Altere seu plano para liberar mais.");
+              return;
+            }else if(planId == "4" && raffles.length == 10){
+              toast.warning("Não é possível adicionar mais campanhas. Altere seu plano para liberar mais.");
+              return;
+            }
+            setOpenModal(true);
+          }}
+          variant="contained"
+          color="primary"
+          sx={{ mt: 4 }}
+        >
+          Adicionar Nova Rifa
+        </Button>
 
       <Modal
   open={openModal}

@@ -21,10 +21,15 @@ import SorteioPage from './admin/SorteioPage';
 import PlanosPage from './pages/PlanosPage';
 import RegisterPage from './admin/RegisterPage';
 import ProtectedRoute from './contexts/ProtectedRoute';
+import PlanoPage from './admin/PlanoPage';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PixMercadoPagoPage from './admin/PixMercadoPagoPage';
+import PagamentoConcluidoAdmin from './admin/PagamentoConcluidoAdmin';
 
 const App = () => {
   return (
-    <Routes>
+    <><ToastContainer /><Routes>
       {/* Layout público com Navbar */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
@@ -38,22 +43,24 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/pagamento-concluido" element={<PagamentoConcluidoPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/roleta" element={<Roleta premios={["Moto", "Carro", "Celular", "Notebook", "TV"]} />} />
+        <Route path="/roleta" element={<Roleta/>} />
 
       </Route>
-
-      {/* Rotas sem navbar (Admin) */}
       <Route path="/admin" element={<AdminLogin />} />
       <Route element={<ProtectedRoute />}>
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="/admin/rifas" element={<RifasAdmin />} />
-      <Route path="/admin/gateway-config" element={<AdminGatewayConfig />} />
-      <Route path="/admin/compras" element={<ComprasPage />} />
-      <Route path="/admin/menor-maior-cota" element={<MaiorMenorCotaPage />} />
-      <Route path="/admin/clientes" element={<ClientesPage />} />
-      <Route path="/admin/sorteio" element={<SorteioPage />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/rifas" element={<RifasAdmin />} />
+        <Route path="/admin/gateway-config" element={<AdminGatewayConfig />} />
+        <Route path="/admin/compras" element={<ComprasPage />} />
+        <Route path="/admin/menor-maior-cota" element={<MaiorMenorCotaPage />} />
+        <Route path="/admin/clientes" element={<ClientesPage />} />
+        <Route path="/admin/sorteio" element={<SorteioPage />} />
+        <Route path="/admin/plano" element={<PlanoPage />} />
+        <Route path="/admin/pixMercadoPago" element={<PixMercadoPagoPage />} />
+        <Route path="/admin/pagamento-concluido-admin" element={<PagamentoConcluidoAdmin />} />
       </Route>
-    </Routes>
+
+    </Routes></>
   );
 };
 

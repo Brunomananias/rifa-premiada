@@ -22,7 +22,7 @@ export default function CompradoresPage() {
   useEffect(() => {
     const fetchCompradores = async () => {
       try {
-        const response = await apiClient.get("api/users/compradores");
+        const response = await apiClient.get("api/customer/customers");
         setCompradores(response.data);
         setFilteredCompradores(response.data);
       } catch (error) {
@@ -39,7 +39,7 @@ export default function CompradoresPage() {
     } else {
       const filtered = compradores.filter(
         (c) =>
-          c.nome_usuario.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           c.whatsapp.includes(searchTerm)
       );
       setFilteredCompradores(filtered);
@@ -48,16 +48,18 @@ export default function CompradoresPage() {
 
   const formatData = (data: string) => {
     let formattedDate = new Date(data);
-
-    // Se data não for um objeto Date válido, tenta formatar a string
+  
     if (isNaN(formattedDate.getTime())) {
-      // Caso a data seja uma string no formato "DD/MM/YYYY HH:mm"
       const [date, time] = data.split(" ");
       const [day, month, year] = date.split("/");
-      formattedDate = new Date(`${year}-${month}-${day}T${time}:00`);
+      formattedDate = new Date(`${year}-${month}-${day}T${time}:00Z`);
     }
-
-    return formattedDate.toLocaleString("pt-BR");
+  
+    // Agora converte de UTC para horário de Brasília (UTC-3)
+    const timezoneOffset = -3 * 60; // -3 horas em minutos
+    const localDate = new Date(formattedDate.getTime() + timezoneOffset * 60000);
+  
+    return localDate.toLocaleString("pt-BR");
   };
 
   return (
@@ -78,7 +80,7 @@ export default function CompradoresPage() {
             color: "white"
           }}
         >
-          Lista de Compradores
+          Lista de Clientes
         </h1>
 
         {/* Barra de Busca */}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import apiClient from "../services/apiClient"; // Ajuste o caminho conforme sua estrutura
+import apiClient from "../services/apiClient";
 import AdminLayout from "./AdminLayout";
 
 type Comprador = {

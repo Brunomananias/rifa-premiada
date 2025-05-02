@@ -3,11 +3,14 @@ import apiClient from '../services/apiClient';
 import AdminLayout from './AdminLayout';
 
 const AdminDashboard = () => {
+  const idUser = localStorage.getItem('user');
   const [rafflesQuantity, setRafflesQuantity] = useState<number>();
   const [purchasesQuantity, setPurchasesQuantity] = useState<number>();
 
   const fetchTotalRaffles = async() => {
-    const response = await apiClient.get('api/raffles')
+    const response = await apiClient.get('api/raffles', {
+      params: { idUsuarioLogado: idUser }
+    })
     setRafflesQuantity(response.data.length)
   }
 

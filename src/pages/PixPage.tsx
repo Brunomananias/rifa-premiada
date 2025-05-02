@@ -30,10 +30,10 @@ const PixPage: React.FC = () => {
   const state = location.state as PixPageState;
 
   const [pixData, setPixData] = useState<PaggueResponse | null>(null);
-  const [paymentStatus, setPaymentStatus] = useState<string>('pending');
+  const [paymentStatus, setPaymentStatus] = useState<string>('0');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState<number>(1 * 60); // 60 minutos * 60 segundos
+  const [timeLeft, setTimeLeft] = useState<number>(2 * 60); // 60 minutos * 60 segundos
 
   useEffect(() => {
     if (!state) return;
@@ -116,7 +116,7 @@ const PixPage: React.FC = () => {
 
   const cancelTransaction = () => {
     console.log('Cancelando a transação devido ao tempo expirado');
-    apiClient.delete(`/api/NumbersSold/${state.numbersSoldIds}`)
+    apiClient.delete(`/api/PixTransactions/${state.numbersSoldIds}`)
       .then(() => {
         alert('Pagamento expirado. Transação cancelada.');
         navigate('/rifas');
