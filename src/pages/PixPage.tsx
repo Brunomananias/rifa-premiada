@@ -45,7 +45,7 @@ const PixPage: React.FC = () => {
     apiClient.post<PaggueResponse>('api/PagguePayment/gerar-pix', {
       payerName: "Teste de integração",
       amount: state.totalPrice,
-      expiration: 1, // tempo de expiração em minutos
+      expiration: 15, // tempo de expiração em minutos
       externalId: state.transactionId.toString(),
       description: state.rifaTitle,
       meta: {
