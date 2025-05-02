@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import apiClient from '../services/apiClient';
 import './RifaPage.css';
+import { toast } from 'react-toastify';
 
 interface Raffle {
   id: number;
@@ -55,7 +56,10 @@ const RifaPage = () => {
       
       if (!rifa) throw new Error("Rifa não encontrada");
       if (quantidade < 1) throw new Error("Quantidade inválida");
-
+      if(rifa.price < 1){
+        toast.warning("Não é possível menos de R$ 1,00");
+        return;
+      }
       // Verificar disponibilidade antes de gerar números
       const availableNumbers = rifa.total_Numbers - (rifa.soldNumbers?.length || 0);
       if (quantidade > availableNumbers) {
@@ -199,8 +203,7 @@ const RifaPage = () => {
                 <input
                   id="quantidade"
                   type="number"
-                  value={quantidade}
-                  min={1}
+                  value={quantidade}                  
                   max={availableNumbers}
                   onChange={(e) => handleQuantidadeChange(Number(e.target.value))}
                 />
