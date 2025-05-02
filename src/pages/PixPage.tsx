@@ -40,13 +40,17 @@ const PixPage: React.FC = () => {
   useEffect(() => {
     if (!state) return;
     console.log(state);
-
+    const generateExternalId = () => {
+      const timestamp = Date.now();
+      const random = Math.floor(Math.random() * 10000);
+      return `rifa_${state.raffleId}_${timestamp}_${random}`;
+    };
     // Fazer a requisição para criar o pagamento Pix
     apiClient.post<PaggueResponse>('api/PagguePayment/gerar-pix', {
       payerName: "Teste de integração",
       amount: state.totalPrice,
       expiration: 15, // tempo de expiração em minutos
-      externalId: state.transactionId.toString(),
+      externalId: generateExternalId(),
       description: state.rifaTitle,
       meta: {
         extraData: "Algum dado extra",
