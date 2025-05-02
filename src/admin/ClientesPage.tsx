@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import apiClient from "../services/apiClient"; // Ajuste o caminho conforme sua estrutura
 import AdminLayout from "./AdminLayout";
 
@@ -124,7 +124,9 @@ export default function CompradoresPage() {
               <td style={{ padding: '1rem' }}>{c.name}</td>
               <td style={{ padding: '1rem' }}>{c.whatsapp}</td>
               <td style={{ padding: '1rem' }}>{c.quantidadeNumeros}</td>
-              <td style={{ padding: '1rem' }}>R$ {c.totalPago.toFixed(2)}</td>
+              <td style={{ padding: '1rem' }}>
+                R$ {parseFloat(c.totalPago).toFixed(2)}
+              </td>
               <td style={{ padding: '1rem' }}>
                 <span
                   style={{

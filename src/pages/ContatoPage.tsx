@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaPaperPlane } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaClock, FaPaperPlane } from 'react-icons/fa';
 import './ContatoPage.css';
 
 const ContatoPage = () => {

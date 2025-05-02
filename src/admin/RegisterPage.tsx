@@ -71,10 +71,9 @@ const RegisterPage = () => {
         document: form.document,
         planName: form.plan_name
       });
-      console.log(form.plan_name);
       const data = response.data;
       console.log(data);
-      login(data.token, data.user, data.planId, data.planName);
+      login(data.token, data.user, data.planId, data.planName, data.userName);
       navigate('/admin/dashboard');
     } catch (error: any) {
       console.error(error);

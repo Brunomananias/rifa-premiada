@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import apiClient from '../services/apiClient';
@@ -30,7 +31,7 @@ const PixMercadoPagoPage: React.FC = () => {
   const [paymentStatus, setPaymentStatus] = useState<string>('pending');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
- const [timeLeft, setTimeLeft] = useState<number>(1 * 60);
+ const [timeLeft, setTimeLeft] = useState<number>(3 * 60);
 
   useEffect(() => {
      if (timeLeft <= 0) {
@@ -116,7 +117,11 @@ const PixMercadoPagoPage: React.FC = () => {
                   localStorage.setItem('plan_id', newPlanId);
                   localStorage.setItem('plan_name', newPlanName);
     
-                  navigate('/admin/pagamento-concluido-admin');
+                  navigate('/admin/pagamento-concluido-admin', {
+                    state: {
+                      paymentId: state.idPixTransaction,
+                      planName: newPlanName,
+                    }});
                 })
                 .catch(error => {
                   console.error('Erro ao atualizar plano do usuário:', error);

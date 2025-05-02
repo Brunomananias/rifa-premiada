@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import './PixPage.css';
 import { useLocation, useNavigate } from 'react-router-dom';

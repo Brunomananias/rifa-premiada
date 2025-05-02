@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import apiClient from '../services/apiClient'; // <-- certifique que está importando aqui
 import './PagamentoConcluidoPage.css';

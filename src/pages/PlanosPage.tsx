@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import "./PlanosPage.css";
 import apiClient from "../services/apiClient";
@@ -16,23 +17,21 @@ interface Plan {
 }
 
 const PlanosPage: React.FC = () => {
-  // Estado para armazenar os planos
   const navigate = useNavigate();
   const [plans, setPlans] = useState<Plan[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Função para buscar os planos da API
   const fetchPlans = async () => {
     try {
-      const response = await apiClient.get('/api/plans'); // Substitua com o endpoint correto
+      const response = await apiClient.get('/api/plans');
       if (!response) {
         throw new Error('Erro ao buscar planos');
       }
       const data = await response.data;
-      setPlans(data); // Armazena os planos no estado
-    } catch (error) {
-      setError(error.message);
+      setPlans(data);
+    } catch (error: any) {
+      setError(error?.message || 'Ocorreu um erro inesperado.');
     } finally {
       setLoading(false);
     }

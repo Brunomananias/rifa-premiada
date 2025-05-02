@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import apiClient from '../services/apiClient'; // <-- certifique que está importando aqui
 import './PagamentoConcluidoAdmin.css';
@@ -41,13 +41,13 @@ const PagamentoConcluidoPage = () => {
                         <path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
                     </svg>
                     <h1>Pagamento Concluído!</h1>
-                    <p className="subtitle">Agora sua assinatura é ${state.planName} !</p>
+                    <p className="subtitle">Agora sua assinatura é {state.planName} !</p>
                 </div>
                 <div className="action-buttons">
                     <button className="primary-button" onClick={() => window.print()}>
                         Imprimir Comprovante
                     </button>
-                    <button className="secondary-button" onClick={() => window.location.href = '/'}>
+                    <button className="secondary-button" onClick={() => window.location.href = '/admin/dashboard'}>
                         Voltar ao Início
                     </button>
                 </div>
