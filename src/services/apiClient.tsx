@@ -8,7 +8,7 @@ import axios from 'axios';
 
 // Criação do cliente Axios
 const apiClient = axios.create({
-  baseURL: 'http://localhost:5163',
+  baseURL: 'api-rifapremiada-hdf4dtama6ffgcfc.eastus2-01.azurewebsites.net',
   headers: {
     'Content-Type': 'application/json',
   },
