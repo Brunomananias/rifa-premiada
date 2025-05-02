@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link to="/como-funciona" onClick={() => setOpen(false)}>Como Funciona</Link>
           <Link to="/planos" onClick={() => setOpen(false)}>Preços</Link>
           <Link to="/rifas" onClick={() => setOpen(false)}>Rifas</Link>
-          <Link to="/contato" onClick={() => setOpen(false)}>Contato</Link>
+          {/* <Link to="/contato" onClick={() => setOpen(false)}>Contato</Link> */}
         </div>
 
         <div className="menu-icon" onClick={() => setOpen(!open)}>
