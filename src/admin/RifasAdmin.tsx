@@ -285,7 +285,7 @@ const RafflesAdmin = () => {
           Adicionar Nova Rifa
         </Button>
 
-      <Modal
+        <Modal
   open={openModal}
   onClose={() => setOpenModal(false)}
   closeAfterTransition
@@ -304,8 +304,12 @@ const RafflesAdmin = () => {
         width: { xs: '90%', sm: 550 },
         mx: 'auto',
         mt: { xs: 2, sm: 8 },
+        mb: { xs: 2, sm: 8 }, // Adiciona margem na parte inferior
         position: 'relative',
-        transition: 'all 0.3s ease-in-out',
+        maxHeight: '90vh', // Limita a altura máxima
+        overflowY: 'auto', // Habilita scroll vertical quando necessário
+        display: 'flex',
+        flexDirection: 'column',
         '&:before': {
           content: '""',
           position: 'absolute',
@@ -318,14 +322,16 @@ const RafflesAdmin = () => {
         },
       }}
     >
-      {/* Botão de fechar com ícone */}
+      {/* Botão de fechar com ícone (mantido no topo fixo) */}
       <IconButton
         aria-label="close"
         onClick={() => setOpenModal(false)}
         sx={{
-          position: 'absolute',
+          position: 'sticky',
+          top: 8,
           right: 16,
-          top: 16,
+          alignSelf: 'flex-end',
+          zIndex: 1,
           color: 'text.secondary',
           backgroundColor: 'rgba(255, 255, 255, 0.7)',
           '&:hover': {
@@ -386,7 +392,8 @@ const RafflesAdmin = () => {
           value={currentRaffle.description}
           onChange={handleChange}
           variant="outlined"
-          rows={0}
+          rows={4}
+          multiline
           fullWidth
           InputProps={{
             startAdornment: (
