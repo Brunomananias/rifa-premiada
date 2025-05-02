@@ -90,6 +90,19 @@ const RafflesAdmin = () => {
     }
 
     try {
+      if ((planId == "5") && currentRaffle.total_Numbers > 500) {
+        toast.warning("Não é possível colocar a quantidade de números. Altere seu plano para liberar mais.");
+        return;
+      }else if(planId == "1" && currentRaffle.total_Numbers > 10000){
+        toast.warning("Não é possível colocar a quantidade de números. Altere seu plano para liberar mais.");
+        return;
+      }else if(planId == "2" && currentRaffle.total_Numbers > 30000){
+        toast.warning("Não é possível colocar a quantidade de números. Altere seu plano para liberar mais.");
+        return;
+      }else if(planId == "3" && currentRaffle.total_Numbers > 70000){
+      toast.warning("Não é possível colocar a quantidade de números. Altere seu plano para liberar mais.");
+      return;
+    }
       if (editingId) {
         // Atualizar rifa existente
         await apiClient.put(`api/Raffles/${editingId}`, {
