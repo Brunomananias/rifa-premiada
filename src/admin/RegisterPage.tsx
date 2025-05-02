@@ -69,7 +69,7 @@ const RegisterPage = () => {
         password: form.password,
         whatsapp: form.whatsapp,
         document: form.document,
-        planName: form.plan_name
+        planName: form.plan_name ? form.plan_name : "Plano Free"
       });
       const data = response.data;
       console.log(data);
