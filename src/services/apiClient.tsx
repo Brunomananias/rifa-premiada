@@ -8,7 +8,7 @@ import axios from 'axios';
 
 // Criação do cliente Axios
 const apiClient = axios.create({
-  baseURL: 'https://api-rifapremiada-hdf4dtama6ffgcfc.eastus2-01.azurewebsites.net/',
+  baseURL: 'https://api-rifapremiada-eefc14ba94ef.herokuapp.com/',
   headers: {
     'Content-Type': 'application/json',
   },
