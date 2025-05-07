@@ -26,6 +26,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PixMercadoPagoPage from './admin/PixMercadoPagoPage';
 import PagamentoConcluidoAdmin from './admin/PagamentoConcluidoAdmin';
+import AdminRaffleEditPage from './admin/AdminRaffleEditPage';
 
 const App = () => {
   return (
@@ -49,6 +50,7 @@ const App = () => {
       <Route path="/admin" element={<AdminLogin />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/rifas/:id/edit" element={<AdminRaffleEditPage />} />
         <Route path="/admin/rifas" element={<RifasAdmin />} />
         <Route path="/admin/gateway-config" element={<AdminGatewayConfig />} />
         <Route path="/admin/compras" element={<ComprasPage />} />

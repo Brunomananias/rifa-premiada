@@ -20,6 +20,7 @@ import {
   faCheckCircle 
 } from '@fortawesome/free-solid-svg-icons';
 import './RifasAdmin.css';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface Raffle {
   id: number;
@@ -195,69 +196,91 @@ const RafflesAdmin = () => {
 
           return (
             <Box
-              key={raffle.id}
-              display="flex"
-              alignItems="center"
-              mb={2}
-              bgcolor="#333"
-              p={2}
-              borderRadius={2}
-              boxShadow={3}
-              sx={{
-                transition: 'transform 0.3s ease',
-                '&:hover': { transform: 'scale(1.05)' },
+            key={raffle.id}
+            display="flex"
+            alignItems="center"
+            flexDirection={{ xs: 'column', sm: 'row' }}
+            flexWrap="wrap"
+            mb={2}
+            bgcolor="#333"
+            p={2}
+            borderRadius={2}
+            boxShadow={3}
+            sx={{
+              transition: 'transform 0.3s ease',
+              '&:hover': { transform: 'scale(1.02)' },
+            }}
+          >
+            <img
+              src={raffle.image_Url}
+              alt={raffle.title}
+              style={{ 
+                width: '100%', 
+                maxWidth: '150px',
+                marginRight: { xs: 0, sm: '1rem' },
+                marginBottom: { xs: '1rem', sm: 0 },
+                borderRadius: '8px', 
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)' 
+              }}
+            />
+            <Box flex={1} width="100%" sx={{ minWidth: 0 }}>
+              <Typography variant="h6" color="white">
+                {raffle.title}
+              </Typography>
+              <Typography color="white">{raffle.description}</Typography>
+              <Typography color="white" variant="body2">
+                Qtd de Cotas: {raffle.total_Numbers} | Preço: R$ {raffle.price.toFixed(2)}
+              </Typography>
+              <Box mt={1} width={{ xs: '100%', sm: '50%' }}>
+                <LinearProgress
+                  variant="determinate"
+                  value={progress}
+                  sx={{
+                    height: 20,
+                    borderRadius: 10,
+                    backgroundColor: '#555',
+                    '& .MuiLinearProgress-bar': { backgroundColor: '#00c853' }
+                  }}
+                />
+                <Typography color="white" variant="caption">
+                  {soldCount} / {raffle.total_Numbers} cotas preenchidas
+                </Typography>
+              </Box>
+            </Box>
+            <Box 
+              display="flex" 
+              width={{ xs: '100%', sm: 'auto' }}
+              mt={{ xs: 2, sm: 0 }}
+              ml={{ sm: 2 }}
+              gap={1}
+            >
+              <Button
+              component={RouterLink}
+              to={`/admin/rifas/${raffle.id}/edit`}
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ 
+                minWidth: { sm: '100px' },
+                py: { xs: 1, sm: 'auto' }
               }}
             >
-              <img
-                src={raffle.image_Url}
-                alt={raffle.title}
-                style={{ width: '100px', marginRight: '1rem', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)' }}
-              />
-              <Box flex={1}>
-                <Typography variant="h6" color="white">
-                  {raffle.title}
-                </Typography>
-                <Typography color="white">{raffle.description}</Typography>
-                <Typography color="white" variant="body2">
-                  Qtd de Cotas: {raffle.total_Numbers} | Preço: R$ {raffle.price.toFixed(2)}
-                </Typography>
-                <Box mt={1} width="50%">
-                  <LinearProgress
-                    variant="determinate"
-                    value={progress}
-                    sx={{
-                      height: 20,
-                      borderRadius: 10,
-                      backgroundColor: '#555',
-                      '& .MuiLinearProgress-bar': { backgroundColor: '#00c853' }
-                    }}
-                  />
-                  <Typography color="white" variant="caption">
-                    {soldCount} / {raffle.total_Numbers} cotas preenchidas
-                  </Typography>
-                </Box>
-              </Box>
-              <Button
-                onClick={() => {
-                  setCurrentRaffle(raffle);
-                  setEditingId(raffle.id);
-                  setOpenModal(true);
-                }}
-                variant="contained"
-                color="primary"
-                sx={{ ml: 2 }}
-              >
-                Editar
-              </Button>
+              Editar
+            </Button>
               <Button
                 onClick={() => handleDeleteRaffle(raffle.id)}
                 variant="contained"
                 color="secondary"
-                sx={{ ml: 1 }}
+                fullWidth={{ xs: true, sm: false }}
+                sx={{ 
+                  minWidth: { sm: '100px' },
+                  py: { xs: 1, sm: 'auto' }
+                }}
               >
                 Deletar
               </Button>
             </Box>
+          </Box>
           );
         })}
       </Box>
@@ -524,7 +547,7 @@ const RafflesAdmin = () => {
 
 <Snackbar
   open={openSnackbar}
-  autoHideDuration={6000}
+  autoHideDuration={5000}
   onClose={() => setOpenSnackbar(false)}
   anchorOrigin={{
     vertical: 'top',    // Coloca o Snackbar no topo

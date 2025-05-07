@@ -42,6 +42,7 @@ const AdminNavbar = ({ closeSidebar }: IProps) => {
     <nav
       style={{
         width: '220px',
+        marginTop: 30,
         minWidth: '220px',
         backgroundColor: '#111',
         padding: '2rem 1rem',
