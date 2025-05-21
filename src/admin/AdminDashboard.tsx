@@ -15,7 +15,9 @@ const AdminDashboard = () => {
   }
 
   const fetchTotalPurchases = async() => {
-    const response = await apiClient.get('api/NumbersSold/quantity-purchases')
+    const response = await apiClient.get('api/NumbersSold/quantity-purchases', {
+      params: { userId: idUser}
+  })
     setPurchasesQuantity(response.data);
   }
 
@@ -25,14 +27,13 @@ const AdminDashboard = () => {
   })
   return (
     <AdminLayout>
-      <h1 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'yellow' }}>Dashboard do Admin</h1>
+      <h1 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'white' }}>Dashboard do Admin</h1>
       <p>Bem-vindo! Aqui você pode gerenciar suas rifas e acompanhar tudo que está rolando.</p>
 
       {/* Exemplo de cards ou dados */}
       <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
         <div style={cardStyle}>Total de Rifas: <strong>{rafflesQuantity}</strong></div>
         <div style={cardStyle}>Total de Compras: <strong>{purchasesQuantity}</strong></div>
-        <div style={cardStyle}>Próxima Rifa: <strong>#13</strong></div>
       </div>
     </AdminLayout>
   );

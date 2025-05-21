@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { planId } from '../services/apiClient';
 
 interface IProps {
   closeSidebar?: () => void;
@@ -8,7 +9,7 @@ interface IProps {
 const AdminNavbar = ({ closeSidebar }: IProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout, user, planId, loading } = useAuth();
+  const { logout, user, loading } = useAuth();
   const planName = localStorage.getItem('plan_name');
   const userName = localStorage.getItem('user_name');
 
@@ -61,15 +62,15 @@ const AdminNavbar = ({ closeSidebar }: IProps) => {
         </div>
       )}
 
-      <Link to="/admin/dashboard" onClick={handleLinkClick} style={linkStyle('/admin/dashboard')}>Dashboard</Link>
-      <Link to="/admin/rifas" onClick={handleLinkClick} style={linkStyle('/admin/rifas')}>Rifas</Link>
-      {planId === 3 && <Link to="/admin/menor-maior-cota" onClick={handleLinkClick} style={linkStyle('/admin/menor-maior-cota')}>Menor e Maior</Link>}
-      <Link to="/admin/compras" onClick={handleLinkClick} style={linkStyle('/admin/compras')}>Compras</Link>
-      {planId !== 5 && <Link to="/admin/clientes" onClick={handleLinkClick} style={linkStyle('/admin/clientes')}>Clientes</Link>}
-      <Link to="/admin/sorteio" onClick={handleLinkClick} style={linkStyle('/admin/sorteio')}>Sorteio</Link>
-      {planId === 3 && <Link to="/admin/gateway-config" onClick={handleLinkClick} style={linkStyle('/admin/gateway-config')}>Gateway de Pagamento</Link>}
-      <Link to="/admin/plano" onClick={handleLinkClick} style={linkStyle('/admin/plano')}>Meu Plano</Link>
-      <Link to="/admin/gateway-config" onClick={handleLinkClick} style={linkStyle('/admin/gateway-config')}>Configuração</Link>
+      <Link to="/admin/dashboard" style={linkStyle('/admin/dashboard')}>Dashboard</Link>
+      <Link to="/admin/rifas"  style={linkStyle('/admin/rifas')}>Rifas</Link>
+      {planId === 3 && <Link to="/admin/menor-maior-cota"  style={linkStyle('/admin/menor-maior-cota')}>Menor e Maior</Link>}
+      <Link to="/admin/compras"  style={linkStyle('/admin/compras')}>Compras</Link>
+      {planId !== 5 && planId !== 1 && <Link to="/admin/clientes"  style={linkStyle('/admin/clientes')}>Clientes</Link>}
+      <Link to="/admin/sorteio"  style={linkStyle('/admin/sorteio')}>Sorteio</Link>
+      {planId === 3 && <Link to="/admin/gateway-config"  style={linkStyle('/admin/gateway-config')}>Gateway de Pagamento</Link>}
+      <Link to="/admin/plano" style={linkStyle('/admin/plano')}>Meu Plano</Link>
+      <Link to="/admin/gateway-config" style={linkStyle('/admin/gateway-config')}>Configuração</Link>
 
       <button onClick={() => { handleLogout(); handleLinkClick(); }} style={{ ...linkStyle('/'), marginTop: '2rem', background: 'none', border: 'none', textAlign: 'left', width: '100%', cursor: 'pointer' }}>SAIR</button>
 

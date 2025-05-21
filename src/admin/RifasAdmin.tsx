@@ -183,7 +183,7 @@ const RafflesAdmin = () => {
 
   return (
     <AdminLayout>
-      <Typography variant="h4" color="white">Rifas Registradas</Typography>
+      <Typography variant="h4" style={{ fontSize: '2rem', marginBottom: '1rem', color: 'white' }}>Rifas Registradas</Typography>
 
       <Box mt={4}>
         {raffles.map((raffle) => {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 // import { jwtDecode } from 'jwt-decode';
-
+export const idUser = localStorage.getItem('user');
+export const planId = Number(localStorage.getItem('plan_id'));
 // // Função para pegar o token do localStorage
 // const getToken = () => {
 //   return localStorage.getItem('jwtToken');

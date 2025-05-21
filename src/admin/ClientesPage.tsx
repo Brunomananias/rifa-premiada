@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import apiClient from "../services/apiClient"; // Ajuste o caminho conforme sua estrutura
+import apiClient, { idUser } from "../services/apiClient"; // Ajuste o caminho conforme sua estrutura
 import AdminLayout from "./AdminLayout";
 
 type Comprador = {
@@ -18,11 +18,13 @@ export default function CompradoresPage() {
   const [filteredCompradores, setFilteredCompradores] = useState<Comprador[]>(
     []
   );
-
+  
   useEffect(() => {
     const fetchCompradores = async () => {
       try {
-        const response = await apiClient.get("api/customer/customers");
+        const response = await apiClient.get("api/customer/customers", {
+          params: {userId: idUser}
+        });
         setCompradores(response.data);
         setFilteredCompradores(response.data);
       } catch (error) {

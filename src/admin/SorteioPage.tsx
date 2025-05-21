@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import "./SorteioPage.css"; // Importando o CSS separado
-import apiClient from "../services/apiClient";
+import apiClient, { idUser } from "../services/apiClient";
 import AdminLayout from "./AdminLayout";
 
 export default function SorteioPage() {
@@ -15,7 +15,9 @@ export default function SorteioPage() {
   useEffect(() => {
     const fetchRifas = async () => {
       try {
-        const response = await apiClient.get('api/raffles/all-raffles');
+        const response = await apiClient.get("api/raffles/all-raffles", {
+          params: { userId: idUser },
+        });
         setRifas(response.data);
       } catch (error) {
         console.error("Erro ao buscar rifas:", error);
@@ -55,7 +57,7 @@ export default function SorteioPage() {
   return (
     <AdminLayout>
       <div className="sorteio-container">
-        <h1>🎯 Sorteio de Números</h1>
+        <h1 style={{ color: "white"}}>🎯 Sorteio de Números</h1>
 
         <div className="select-container">
           <select

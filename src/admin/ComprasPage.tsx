@@ -19,11 +19,14 @@ export default function CompradoresPage() {
   const [filteredCompradores, setFilteredCompradores] = useState<Comprador[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const idUser = localStorage.getItem('user');
 
   useEffect(() => {
     const fetchCompradores = async () => {
       try {
-        const response = await apiClient.get("api/NumbersSold/compras");
+        const response = await apiClient.get("api/NumbersSold/compras", {
+          params: {userId: idUser}
+        });
         setCompradores(response.data);
         setFilteredCompradores(response.data);
       } catch (error) {
