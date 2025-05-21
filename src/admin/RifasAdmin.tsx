@@ -211,18 +211,20 @@ const RafflesAdmin = () => {
               '&:hover': { transform: 'scale(1.02)' },
             }}
           >
-            <img
+           <Box
+              component="img"
               src={raffle.image_Url}
               alt={raffle.title}
-              style={{ 
-                width: '100%', 
+              sx={{
+                width: '100%',
                 maxWidth: '150px',
-                marginRight: { xs: 0, sm: '1rem' },
-                marginBottom: { xs: '1rem', sm: 0 },
-                borderRadius: '8px', 
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)' 
+                mr: { xs: 0, sm: '1rem' },
+                mb: { xs: '1rem', sm: 0 },
+                borderRadius: '8px',
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)'
               }}
             />
+
             <Box flex={1} width="100%" sx={{ minWidth: 0 }}>
               <Typography variant="h6" color="white">
                 {raffle.title}
@@ -271,7 +273,7 @@ const RafflesAdmin = () => {
                 onClick={() => handleDeleteRaffle(raffle.id)}
                 variant="contained"
                 color="secondary"
-                fullWidth={{ xs: true, sm: false }}
+                fullWidth
                 sx={{ 
                   minWidth: { sm: '100px' },
                   py: { xs: 1, sm: 'auto' }
