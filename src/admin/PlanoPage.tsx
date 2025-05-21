@@ -88,7 +88,9 @@ const PlanoPage: React.FC = () => {
 
   const handleSubscribe = async (plan: Plan) => {
     try {
-      const userEmail = await apiClient.get(`api/users/user-email?idUser=${user}`);
+      const userEmail = await apiClient.get(`api/users/user-email`, {
+        params: {idUser: user}
+      });
       const response = await apiClient.post("api/MercadoPago", {
         Valor: parseFloat(plan.price),
         Descricao: `Assinatura do plano ${plan.name}`,
