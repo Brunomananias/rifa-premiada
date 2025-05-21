@@ -29,7 +29,13 @@ const RifaPage = () => {
         setIsLoading(true);
         if (id) {
           const response = await apiClient.get(`api/Raffles/${id}`);
-          setRifa(response.data);
+          const data = response.data;
+
+        const soldNumbersArray = typeof data.soldNumbers === 'string'
+          ? data.soldNumbers.split(',').map((n: string) => parseInt(n.trim(), 10))
+          : data.soldNumbers;
+
+        setRifa({ ...data, soldNumbers: soldNumbersArray });
         }
       } catch (error) {
         console.error("Erro ao carregar rifa", error);

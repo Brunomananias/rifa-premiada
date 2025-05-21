@@ -66,7 +66,11 @@ const AdminNavbar = ({ closeSidebar }: IProps) => {
       <Link to="/admin/rifas"  style={linkStyle('/admin/rifas')}>Rifas</Link>
       {planId === 3 && <Link to="/admin/menor-maior-cota"  style={linkStyle('/admin/menor-maior-cota')}>Menor e Maior</Link>}
       <Link to="/admin/compras"  style={linkStyle('/admin/compras')}>Compras</Link>
-      {planId !== 5 && planId !== 1 && <Link to="/admin/clientes"  style={linkStyle('/admin/clientes')}>Clientes</Link>}
+      {(planId !== 5 && planId !== 1) && (
+        <Link to="/admin/clientes" style={linkStyle('/admin/clientes')}>
+          Clientes
+        </Link>
+      )}
       <Link to="/admin/sorteio"  style={linkStyle('/admin/sorteio')}>Sorteio</Link>
       {planId === 3 && <Link to="/admin/gateway-config"  style={linkStyle('/admin/gateway-config')}>Gateway de Pagamento</Link>}
       <Link to="/admin/plano" style={linkStyle('/admin/plano')}>Meu Plano</Link>
